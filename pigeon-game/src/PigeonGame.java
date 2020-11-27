@@ -28,6 +28,10 @@ public class PigeonGame extends SimpleApp {
     
     int frameNumber;
     
+    //Var to count number of frames
+    //Initialized --> countFrame = 0
+    int countFrame;
+    
     double gradient = 0;
  
     public static void main(String[] args) {
@@ -78,6 +82,17 @@ public class PigeonGame extends SimpleApp {
         if(explosionStatus == true)
         {
         	screen.drawImage(explosion, explosionX, explosionY);
+        	//Count number of frames passed
+        	countFrame += 1;
+        	
+        	//If 50 frames already passed
+        	if(countFrame > 50) {
+        		//Get rid of explosion effect
+        		explosionStatus = false;
+        		//reset counter
+        		countFrame = 0;
+        	}
+        		
         }
         
     }
