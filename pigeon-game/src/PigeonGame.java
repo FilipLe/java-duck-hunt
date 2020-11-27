@@ -85,8 +85,8 @@ public class PigeonGame extends SimpleApp {
         	//Count number of frames passed
         	countFrame += 1;
         	
-        	//If 50 frames already passed
-        	if(countFrame > 50) {
+        	//If 30 frames already passed
+        	if(countFrame > 30) {
         		//Get rid of explosion effect
         		explosionStatus = false;
         		//reset counter
