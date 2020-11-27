@@ -35,6 +35,9 @@ public class PigeonGame extends SimpleApp {
     boolean explosionStatus = false;
     
     
+    //Declare win image
+    Image win;
+    
     //Boolean to check whether pigeon is dead
     boolean pigeonDead = false;
     
@@ -64,6 +67,8 @@ public class PigeonGame extends SimpleApp {
         pigeon = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/bird.png");
         //Import explosion image
         explosion = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/explosion.png");
+        //Import win image
+        win = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/win.png");
     }
     
     
@@ -132,6 +137,8 @@ public class PigeonGame extends SimpleApp {
 	        if(Math.abs((int)(explosionX-x)) < 20 && Math.abs((int)(explosionY-y)) < 20) 
 	        {
 	        	pigeonDead = true;
+	        	System.out.println("Good game");
+	        	//screen.drawImage(win, explosionX, explosionY);
 	        }
     	}
         
