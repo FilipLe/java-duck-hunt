@@ -68,7 +68,7 @@ public class PigeonGame extends SimpleApp {
         //Import explosion image
         explosion = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/explosion.png");
         //Import win image
-        win = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/win.png");
+        //win = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/win.png");
     }
     
     
