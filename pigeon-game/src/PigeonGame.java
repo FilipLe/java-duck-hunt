@@ -23,6 +23,8 @@ public class PigeonGame extends SimpleApp {
     Image explosion;
     int explosionX = 0;
     int explosionY = 0;
+    //Boolean to start explosion effect
+    boolean explosionStatus = false;
     
     int frameNumber;
     
@@ -72,8 +74,11 @@ public class PigeonGame extends SimpleApp {
         	y -= gradient;
         }
         
-        screen.drawImage(explosion, explosionX, explosionY);
-        
+        //Do if instead of while because it is on frame (equivalent to while)
+        if(explosionStatus == true)
+        {
+        	screen.drawImage(explosion, explosionX, explosionY);
+        }
         
     }
     
@@ -81,5 +86,6 @@ public class PigeonGame extends SimpleApp {
     {
     	explosionX = x;
     	explosionY = y;
+    	explosionStatus = true;
     }
 }
