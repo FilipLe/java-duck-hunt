@@ -19,6 +19,11 @@ public class PigeonGame extends SimpleApp {
 	Image bg;
 	//Declare pigeon image
     Image pigeon;
+    //Declare explosion image
+    Image explosion;
+    int explosionX = 0;
+    int explosionY = 0;
+    
     int frameNumber;
     
     double gradient = 0;
@@ -33,6 +38,8 @@ public class PigeonGame extends SimpleApp {
         bg = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/background.png");
         //Import pigeon image
         pigeon = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/bird.png");
+        //Import explosion image
+        explosion = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/explosion.png");
     }
     
     public void onFrame() {
@@ -48,26 +55,31 @@ public class PigeonGame extends SimpleApp {
         				width, height)*/
         frameNumber = (frameNumber + 1) % 18;
         
-        int targetDestinationX = random.nextInt(400)-200;
+        //Code to get pigeon to move around randomly
+        int targetDestinationX = random.nextInt(400)-random.nextInt(300);
         while(targetDestinationX == x)
-        	targetDestinationX = random.nextInt(400)-200;
-        int targetDestinationY = random.nextInt(400)-200;
+        	targetDestinationX = random.nextInt(400)-random.nextInt(300);
+        int targetDestinationY = random.nextInt(400)-random.nextInt(300);
         gradient = (targetDestinationY - y)/(targetDestinationX - x);
         if(x < targetDestinationX) 
         {
-        	x += 3;
+        	x += 5;
         	y += gradient;
         }
         else if (x > targetDestinationX) 
         {
-        	x -= 3;
+        	x -= 10;
         	y -= gradient;
         }
+        
+        screen.drawImage(explosion, explosionX, explosionY);
+        
         
     }
     
     public void onMouseClick(int x, int y)
     {
-    	
+    	explosionX = x;
+    	explosionY = y;
     }
 }
