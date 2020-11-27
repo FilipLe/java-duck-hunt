@@ -55,12 +55,12 @@ public class PigeonGame extends SimpleApp {
         gradient = (targetDestinationY - y)/(targetDestinationX - x);
         if(x < targetDestinationX) 
         {
-        	x += 2;
+        	x += 3;
         	y += gradient;
         }
         else if (x > targetDestinationX) 
         {
-        	x -= 2;
+        	x -= 3;
         	y -= gradient;
         }
         
