@@ -68,99 +68,107 @@ public class PigeonGame extends SimpleApp {
         //Import explosion image
         explosion = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/explosion.png");
         //Import win image
-        //win = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/win.png");
+        win = FileUtil.loadImage("/Users/nguyenle/pigeon-game/pigeon game graphics/win.png");
     }
     
     
     public void onFrame() {
-    	//While Pigeon is alive
+    	//Draw the Background 
+        screen.drawImage(bg, 0, 0);
+        
+        //While Pigeon is alive, let it fly in random movements
     	if(pigeonDead == false)
     	{
-	    	//Draw the Background 
-	        screen.drawImage(bg, 0, 0);
-	        
-	        
 	        //Draw the Pigeon at random position
 	        screen.drawImage(pigeon,
 	        				(int) x,(int) y, 
 	        				0, (frameNumber / 2) * 128, 
 	        				192, 128);
 	        
-	        /*screen.drawImage(
-	         				image,
-	        				x-coord of where to draw pigeon on screen,y-coord of where to draw pigeon on screen,
-	        				x-coord of where to take it from the pic, y-coord of where to take it from the pic,
-	        				*each pigeon is at x-coord 0 and is 128 tall in height
-	        				width, height)*/
-	        
 	        frameNumber = (frameNumber + 1) % 18;
-	        
-	        
-	        //Code to get pigeon to move around randomly
-	        int targetDestinationX = random.nextInt(400)-random.nextInt(300);
-	        while(targetDestinationX == x)
-	        	targetDestinationX = random.nextInt(400)-random.nextInt(300);
-	        int targetDestinationY = random.nextInt(400)-random.nextInt(300);
-	        gradient = (targetDestinationY - y)/(targetDestinationX - x);
-	        //Move right
-	        if(x < targetDestinationX) 
-	        {
-	        	x += 5;
-	        	y += gradient;
-	        }
-	        //Move left
-	        else if (x > targetDestinationX) 
-	        {
-	        	x -= 10;
-	        	y -= gradient;
-	        }
-	        
-	        //Loop for the explosion effect to stay on for a few sec and disappear
-	        //Do if instead of while because it is on frame (equivalent to while)
-	        if(explosionStatus == true)
-	        {
-	        	screen.drawImage(explosion, explosionX, explosionY);
-	        	//Count number of frames passed
-	        	countFrame += 1;
-	        	
-	        	//If 30 frames already passed
-	        	if(countFrame > 30) {
-	        		//Get rid of explosion effect
-	        		explosionStatus = false;
-	        		//reset counter
-	        		countFrame = 0;
-	        	}
-	        		
-	        }
-	        
-	        /*
-	         * To get rid of the pigeon, we aren't going to pause the frames
-	         * what we can do is let the frames continue running
-	         * when pigeon is hit, making it fall down
-	         * 
-	         * screen.drawImage(pigeon,
-	        				(int) x,(int) (y-countFrame*10), 
-	        				0, (frameNumber / 2) * 128, 
-	        				192, 128);
-	        				
-	         * The pigeon falls instantaneously 
-	         * The pigeon falls below the screen
-	         * The frames still run
-	         * 
-	         * 
-	         * 
-	         * Also create a var to count num of pigeons hit
-	         * If 5 pigeon hit --> throw in a pic of a trophy --> win
-	         */
-	        
-	        //If explosion hits pigeon, pigeon is dead. Which stops the game
-	        if(Math.abs((int)(explosionX-x)) < 20 && Math.abs((int)(explosionY-y)) < 20) 
-	        {
-	        	pigeonDead = true;
-	        	System.out.println("Good game");
-	        	//screen.drawImage(win, explosionX, explosionY);
-	        }
     	}
+    	
+    	//Explanation of the screen.drawImage() parameters
+    	
+        /*screen.drawImage(
+         				image,
+        				x-coord of where to draw pigeon on screen,y-coord of where to draw pigeon on screen,
+        				x-coord of where to take it from the pic, y-coord of where to take it from the pic,
+        				*each pigeon is at x-coord 0 and is 128 tall in height
+        				width, height)*/
+           
+        
+        //Code to get pigeon to move around randomly
+        int targetDestinationX = random.nextInt(400)-random.nextInt(300);
+        while(targetDestinationX == x)
+        	targetDestinationX = random.nextInt(400)-random.nextInt(300);
+        int targetDestinationY = random.nextInt(400)-random.nextInt(300);
+        gradient = (targetDestinationY - y)/(targetDestinationX - x);
+        //Move right
+        if(x < targetDestinationX) 
+        {
+        	x += 5;
+        	y += gradient;
+        }
+        //Move left
+        else if (x > targetDestinationX) 
+        {
+        	x -= 10;
+        	y -= gradient;
+        }
+        
+        
+        //Loop for the explosion effect to stay on for a few sec and disappear
+        //Do if instead of while because it is on frame (equivalent to while)
+        if(explosionStatus == true)
+        {
+        	screen.drawImage(explosion, explosionX, explosionY);
+        	//Count number of frames passed
+        	countFrame += 1;
+        	
+        	//If 30 frames already passed
+        	if(countFrame > 30) {
+        		//Get rid of explosion effect
+        		explosionStatus = false;
+        		//reset counter
+        		countFrame = 0;
+        	}
+        		
+        }
+        
+        /*
+         * To get rid of the pigeon, we aren't going to pause the frames
+         * what we can do is let the frames continue running
+         * when pigeon is hit, make it fall down
+         * 
+         * screen.drawImage(pigeon,
+        				(int) x,(int) (y-countFrame*10), 
+        				0, (frameNumber / 2) * 128, 
+        				192, 128);
+        				
+         * The pigeon falls instantaneously 
+         * The pigeon falls below the screen
+         * The frames still run
+         * 
+         * 
+         * 
+         * Also create a var to count num of pigeons hit
+         * If 5 pigeon hit --> throw in a pic of a trophy --> win
+         */
+        
+        //If explosion hits pigeon, pigeon is dead. Which stops the game (within 30 pixels radius)
+        if(Math.abs((int)(explosionX-x)) < 30 && Math.abs((int)(explosionY-y)) < 30) 
+        {
+        	//If it hits the pigeon, make the pigeon fall down countFramex10 units down
+        	y -= countFrame*10;
+        	//Stop the game
+        	pigeonDead = true;
+        	
+        }    	
+        
+        //When pigeon is killed, display "winner"
+        if(pigeonDead == true)
+        	screen.drawImage(win, explosionX, explosionY);
         
     }
     
