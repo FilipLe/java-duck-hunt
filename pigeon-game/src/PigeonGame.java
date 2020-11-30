@@ -133,6 +133,26 @@ public class PigeonGame extends SimpleApp {
 	        		
 	        }
 	        
+	        /*
+	         * To get rid of the pigeon, we aren't going to pause the frames
+	         * what we can do is let the frames continue running
+	         * when pigeon is hit, making it fall down
+	         * 
+	         * screen.drawImage(pigeon,
+	        				(int) x,(int) (y-countFrame*10), 
+	        				0, (frameNumber / 2) * 128, 
+	        				192, 128);
+	        				
+	         * The pigeon falls instantaneously 
+	         * The pigeon falls below the screen
+	         * The frames still run
+	         * 
+	         * 
+	         * 
+	         * Also create a var to count num of pigeons hit
+	         * If 5 pigeon hit --> throw in a pic of a trophy --> win
+	         */
+	        
 	        //If explosion hits pigeon, pigeon is dead. Which stops the game
 	        if(Math.abs((int)(explosionX-x)) < 20 && Math.abs((int)(explosionY-y)) < 20) 
 	        {
